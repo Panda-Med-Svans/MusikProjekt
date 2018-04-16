@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PickUpOwls : MonoBehaviour {
 
-    
+    public GameObject owl;
+    //private <OtherScript> Instruments;
     
 	// Use this for initialization
 	void Start () {
-		
+        owl = this.gameObject;
 	}
 	
 	// Update is called once per frame
@@ -16,5 +17,23 @@ public class PickUpOwls : MonoBehaviour {
 		
 	}
 
-    
+    public void Test()
+    {
+        Debug.Log("Collected Owl");
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag ("Player"))
+        {
+            Debug.Log("Destroyed");
+            owl.SetActive(false);
+            //add instrument to song
+            //DestroyObject(owl);
+        }
+
+
+    }
+
+
 }

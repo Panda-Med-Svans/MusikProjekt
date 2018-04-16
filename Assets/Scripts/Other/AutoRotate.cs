@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class AutoRotate : MonoBehaviour {
 
+    public GameObject target;
     public float rotationX;
     public float rotationY;
     public float rotationZ;
-    private float rotationSpeed = 90f;
 
     // Use this for initialization
     void Start () {
@@ -16,6 +16,6 @@ public class AutoRotate : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Rotate(new Vector3(rotationX, rotationY, rotationZ) * rotationSpeed * Time.deltaTime);
+        target.transform.Rotate(new Vector3(rotationX, rotationY, rotationZ) * Time.deltaTime);
     }
 }

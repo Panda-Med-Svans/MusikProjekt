@@ -18,7 +18,7 @@ public class CharacterJump : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         Debug.Log(doubleJumpCount);
-        if (Input.GetKeyDown(KeyCode.Space) && doubleJumpCount <= numberOfDoubleJumps)
+        if (Input.GetButtonDown("Jump") && doubleJumpCount <= numberOfDoubleJumps)//gör doubleJumpCount till bool, hasDoubleJumped
         {
             rb.velocity += jumpSpeed * Vector3.up;
             doubleJumpCount++;

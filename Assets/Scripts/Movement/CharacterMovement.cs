@@ -10,16 +10,19 @@ public class CharacterMovement : MonoBehaviour
 
     private Vector2 moveDirection = Vector2.zero;
 
+    private CharacterController player;
+
     // Use this for initialization
     void Start()
     {
-
+        player = GetComponent<CharacterController>(); 
+        //flyttade från FixedUpdate till hit
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        CharacterController player = GetComponent<CharacterController>();
+        //CharacterController player = GetComponent<CharacterController>(); //(behöver den hitta komonenten varje update?)
         if (player.isGrounded)
         {
             moveDirection.y = 0;
