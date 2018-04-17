@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    //private PickUpOwls owlScript;
+    //public PickUpOwls owlScript;
 
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
 		
 	}
@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
         }
         //if (other.gameObject.CompareTag("Owl"))
         //{
-        //    //owlScript.Test(); //
+        //    owlScript.Test(); //
         //    other.gameObject.SetActive(false);
         //    //TODO: create interaction to unlock, add music part to existing one
         //}

@@ -4,39 +4,85 @@ using UnityEngine;
 
 public class CharacterJump : MonoBehaviour {
 
-    public int numberOfDoubleJumps = 1;
-    private int doubleJumpCount = 0;
+    private bool isGrounded, hasJumped, canDoubleJump = false;
+    public float delayBeforeDoubleJump;
+
+
+
+
+    //public int numberOfDoubleJumps = 1;
+    //private int doubleJumpCount = 0;
     public float jumpSpeed = 5f;
     public Rigidbody rb;
 
-    // Use this for initialization
     void Start () {
-        doubleJumpCount = numberOfDoubleJumps;
+        //doubleJumpCount = numberOfDoubleJumps;
         rb = GetComponent<Rigidbody>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        Debug.Log(doubleJumpCount);
-        if (Input.GetButtonDown("Jump") && doubleJumpCount <= numberOfDoubleJumps)//gör doubleJumpCount till bool, hasDoubleJumped
+
+    //void FixedUpdate()
+    //{
+    //    Debug.Log(doubleJumpCount);
+    //    if (Input.GetButtonDown("Jump") && doubleJumpCount <= numberOfDoubleJumps)//gör doubleJumpCount till bool, hasDoubleJumped
+    //    {
+    //        rb.velocity += jumpSpeed * Vector3.up;
+    //        doubleJumpCount++;
+    //    }
+    //}
+
+    void FixedUpdate()
+    {
+        if (Input.GetButtonDown("Jump"))
         {
-            rb.velocity += jumpSpeed * Vector3.up;
-            doubleJumpCount++;
+            if(isGrounded)
+            {
+                Jump();
+            }
+            if(canDoubleJump)
+            {
+                Jump();
+            }
         }
     }
+
     void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Ground")
         {
-            doubleJumpCount = 0;
+            isGrounded = true;
+            hasJumped = false;
+            canDoubleJump = false;
         }
         if (collision.gameObject.tag == "Bad")
         {
             Bad();
         }
     }
+
     void Bad()
     {
         //TODO something when you touch bad
+    }
+
+    void Jump()
+    {
+        if(isGrounded)
+        {
+            hasJumped = true;
+            isGrounded = false;
+            rb.velocity += jumpSpeed * Vector3.up;
+            Invoke("EnableDoubleJump", delayBeforeDoubleJump);
+            //TODO: link animation, sound etc
+        }
+        if (canDoubleJump)
+        {
+            canDoubleJump = false;
+            rb.velocity += jumpSpeed * Vector3.up;
+            //TODO: link animation, sound etc
+        }
+    }
+    void EnableDoubleJump()
+    {
+        canDoubleJump = true;
     }
 }

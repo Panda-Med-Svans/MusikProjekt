@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PickUpOwls : MonoBehaviour {
 
-    public GameObject owl;
+    private GameObject owl;
     //private <OtherScript> Instruments;
     
 	// Use this for initialization
@@ -12,10 +12,7 @@ public class PickUpOwls : MonoBehaviour {
         owl = this.gameObject;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 
     public void Test()
     {
