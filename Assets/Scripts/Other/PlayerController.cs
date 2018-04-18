@@ -22,11 +22,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Pick Up"))
-        {
-            other.gameObject.SetActive(false);
-            //TODO: add score, play sound
-        }
+        //if (other.gameObject.CompareTag("Pick Up"))
+        //{
+        //    other.gameObject.SetActive(false);
+        //    //TODO: add score, play sound
+        //}
         //if (other.gameObject.CompareTag("Owl"))
         //{
         //    owlScript.Test(); //

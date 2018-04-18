@@ -5,7 +5,6 @@ using UnityEngine;
 public class CharacterMovement : MonoBehaviour
 {
     //public something tiltAngle;
-    
     public float startSpeed = 6f;
     private float currentSpeed;
     public float minSpeed;
@@ -15,6 +14,7 @@ public class CharacterMovement : MonoBehaviour
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
 
+    public Rigidbody rb;
 
     private Vector2 moveDirection = Vector2.zero;
 
@@ -23,8 +23,11 @@ public class CharacterMovement : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        minSpeed = startSpeed * 0.6f;
+        maxSpeed = startSpeed * 2f;
+        player = GetComponent<CharacterController>();
         currentSpeed = startSpeed;
-        player = GetComponent<CharacterController>(); 
+        rb = GetComponent<Rigidbody>();
         //flyttade från FixedUpdate till hit
     }
     
@@ -55,16 +58,15 @@ public class CharacterMovement : MonoBehaviour
         #endregion
 
         //CharacterController player = GetComponent<CharacterController>(); //(behöver den hitta komonenten varje update?)
-        if (player.isGrounded) //
+        
+        if (player.isGrounded)
         {
             moveDirection.y = 0;
             if (Input.GetButton("Jump"))
             {
-                    moveDirection.y = jumpSpeed;
+                moveDirection.y = jumpSpeed;
             }
-            
         }
-
         else
         {
             moveDirection.y -= gravity * Time.deltaTime;

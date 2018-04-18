@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class CharacterJump : MonoBehaviour {
 
-    private bool isGrounded, hasJumped, canDoubleJump = false;
+    private bool isGrounded = false;
+    private bool hasJumped = false;
+    private bool canDoubleJump = false;
     public float delayBeforeDoubleJump;
 
 
@@ -32,6 +34,7 @@ public class CharacterJump : MonoBehaviour {
 
     void FixedUpdate()
     {
+        //Debug.Log("isGrounded is " + isGrounded + " & canDoubleJump is " + canDoubleJump);
         if (Input.GetButtonDown("Jump"))
         {
             if(isGrounded)
