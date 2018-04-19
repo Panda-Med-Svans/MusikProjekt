@@ -27,7 +27,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1371687756918978
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,11 +141,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d12573536dcd7c044bc3ec10b4413bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delayBeforeDoubleJump: 0
   startSpeed: 6
-  minSpeed: 2
-  maxSpeed: 15
-  smoothTime: 2
-  jumpSpeed: 8
+  minSpeedMultiplier: 0.6
+  maxSpeedMultiplier: 2
+  smoothTime: 1
+  jumpSpeed: 10
   gravity: 20
   rb: {fileID: 0}
 --- !u!135 &135813547182281186

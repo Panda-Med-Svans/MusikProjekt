@@ -4,76 +4,144 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
-    //public something tiltAngle;
-    public float startSpeed = 6f;
-    private float currentSpeed;
-    public float minSpeed;
-    public float maxSpeed;
-    public float smoothTime;
+    
+
+        #region Character Basics
 
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
-
-    public Rigidbody rb;
-
     private Vector2 moveDirection = Vector2.zero;
-
     private CharacterController player;
 
-    // Use this for initialization
-    void Start()
-    {
-        minSpeed = startSpeed * 0.6f;
-        maxSpeed = startSpeed * 2f;
-        player = GetComponent<CharacterController>();
-        currentSpeed = startSpeed;
-        rb = GetComponent<Rigidbody>();
-        //flyttade från FixedUpdate till hit
-    }
-    
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        #region placeholder Tilt speed
-        //Debug.Log(currentSpeed);
-        ////placeholder for tilt speed.
-        //if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) 
-        //{
-        //    if(currentSpeed <= maxSpeed)
-        //    {
-        //        currentSpeed = Mathf.Lerp(currentSpeed, maxSpeed, (smoothTime * Time.deltaTime));
-        //    }
-        //}
-        //if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        //{
-        //    if (minSpeed <= currentSpeed)
-        //    {
-        //        currentSpeed = Mathf.Lerp(currentSpeed, minSpeed, (smoothTime * Time.deltaTime));
-        //    }
-        //}
-        //else
-        //{
-        //    currentSpeed = Mathf.Lerp(currentSpeed, startSpeed, (smoothTime * Time.deltaTime));
-        //}
         #endregion
 
-        //CharacterController player = GetComponent<CharacterController>(); //(behöver den hitta komonenten varje update?)
-        
+        #region Jump Variables
+
+    private bool hasJumped = false;
+    private bool canDoubleJump = false;
+    public float delayBeforeDoubleJump;
+
+        #endregion
+
+        #region Tilt Controls
+
+    public float startSpeed = 6f;
+    private float currentSpeed;
+    public float minSpeedMultiplier;
+    private float minSpeed;
+    public float maxSpeedMultiplier;
+    private float maxSpeed;
+    public float smoothTime;
+    //public something tiltAngle;
+
+    #endregion
+
+
+    void Start()
+    {
+        minSpeed = startSpeed * minSpeedMultiplier;
+        maxSpeed = startSpeed * maxSpeedMultiplier;
+        player = GetComponent<CharacterController>();
+        currentSpeed = startSpeed;
+    }
+
+
+        #region Double Jump
+
+    void FixedUpdate()
+    {
         if (player.isGrounded)
         {
             moveDirection.y = 0;
-            if (Input.GetButton("Jump"))
+            hasJumped = false;
+            canDoubleJump = false;
+            if (Input.GetButtonDown("Jump"))
             {
-                moveDirection.y = jumpSpeed;
+                Jump();
             }
         }
+
         else
         {
             moveDirection.y -= gravity * Time.deltaTime;
         }
 
+        if (Input.GetButtonDown("Jump"))
+        {
+            Jump();
+        }
         moveDirection.x = currentSpeed;
 
         player.Move(moveDirection * Time.deltaTime);
+
+        Debug.Log(player.isGrounded);
     }
+    public void Jump()
+    {
+        if (player.isGrounded)
+        {
+            hasJumped = true;
+            moveDirection.y = jumpSpeed;
+            Invoke("EnableDoubleJump", delayBeforeDoubleJump);
+            //TODO: link animation, sound etc
+        }
+        if (canDoubleJump)
+        {
+            canDoubleJump = false;
+            moveDirection.y = jumpSpeed;
+            //TODO: link animation, sound etc
+        }
+    }
+    void EnableDoubleJump()
+    {
+        canDoubleJump = true;
+    }
+
+        #endregion
+
+
+        #region Single Jump //Unused
+    //void FixedUpdate()
+    //{
+    //    if (player.isGrounded)
+    //    {
+    //        moveDirection.y = 0;
+    //        if (Input.GetButton("Jump"))
+    //        {
+    //            moveDirection.y = jumpSpeed;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        moveDirection.y -= gravity * Time.deltaTime;
+    //    }
+    //    moveDirection.x = currentSpeed;
+    //    player.Move(moveDirection * Time.deltaTime);
+    //}
+
+        #region placeholder Tilt speed
+        //    //Debug.Log(currentSpeed);
+        //    ////placeholder for tilt speed.
+        //    //if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        //    //{
+        //    //    if (currentSpeed <= maxSpeed)
+        //    //    {
+        //    //        currentSpeed = Mathf.Lerp(currentSpeed, maxSpeed, (smoothTime * Time.deltaTime));
+        //    //    }
+        //    //}
+        //    //if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        //    //{
+        //    //    if (minSpeed <= currentSpeed)
+        //    //    {
+        //    //        currentSpeed = Mathf.Lerp(currentSpeed, minSpeed, (smoothTime * Time.deltaTime));
+        //    //    }
+        //    //}
+        //    //else
+        //    //{
+        //    //    currentSpeed = Mathf.Lerp(currentSpeed, startSpeed, (smoothTime * Time.deltaTime));
+        //}
+            #endregion
+
+        #endregion
+
 }
