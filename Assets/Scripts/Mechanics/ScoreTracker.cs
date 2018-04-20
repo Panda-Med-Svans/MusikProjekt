@@ -37,7 +37,7 @@ public class ScoreTracker : MonoBehaviour {
     }
     public void PitchChange()
     {
-        Debug.Log("Called");
+        //Debug.Log("Called");
         currentPitch += pitchMultiplier;
     }
 
