@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114737885278884336}
   m_Layer: 0
   m_Name: GameMaster
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,8 +52,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPoints: 0
-  currentPitch: 0
+  currentPitch: 1
   minPitch: 1
   maxPitch: 2
-  smoothPitch: 5
-  pitchMultiplier: 0.15
+  smoothPitch: 0.25
+  pitchMultiplier: 0.2

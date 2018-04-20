@@ -9,11 +9,6 @@ public class CharacterJump : MonoBehaviour {
     private bool canDoubleJump = false;
     public float delayBeforeDoubleJump;
 
-
-
-
-    //public int numberOfDoubleJumps = 1;
-    //private int doubleJumpCount = 0;
     public float jumpSpeed = 5f;
     public Rigidbody rb;
 
