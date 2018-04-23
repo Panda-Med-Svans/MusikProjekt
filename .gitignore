@@ -41,3 +41,4 @@ ehthumbs.db
 Thumbs.db
 .vs/PandaMedSvans/v15/sqlite3/storage.ide
 *.meta
+Assets/Scripts/Camera/ControllingCameraAspectScript1.cs

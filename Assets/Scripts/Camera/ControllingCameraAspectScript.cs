@@ -2,12 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 //using ImageVideoContactPicker;
-
-
 public class ControllingCameraAspectScript : MonoBehaviour
 {
-
-
     // Use this for initialization
     void Start()
     {

@@ -15,7 +15,7 @@ public class CharacterMovement : MonoBehaviour
 
         #endregion
 
-        #region Jump Variables
+        #region Jump
 
     //private bool hasJumped = false;
     private bool canDoubleJump = false;
@@ -23,7 +23,7 @@ public class CharacterMovement : MonoBehaviour
 
         #endregion
 
-        #region Tilt Controls
+        #region Tilt Controls + Character Speed
 
     public float startSpeed = 6f;
     private float currentSpeed;
@@ -83,12 +83,14 @@ public class CharacterMovement : MonoBehaviour
             //hasJumped = true;
             moveDirection.y = jumpSpeed;
             Invoke("EnableDoubleJump", delayBeforeDoubleJump);
+            //jumpsound.Play();
             //TODO: link animation, sound etc
         }
         if (canDoubleJump)
         {
             canDoubleJump = false;
             moveDirection.y = jumpSpeed;
+            //jumpsound.Play();
             //TODO: link animation, sound etc
         }
     }
